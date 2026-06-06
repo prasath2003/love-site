@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Emimaal ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff6ec4,#7873f5);
+    font-family:Arial,sans-serif;
+}
+.container{
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+}
+button{
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+}
+#yesBtn{
+    background:#ff4081;
+    color:white;
+}
+#noBtn{
+    background:gray;
+    color:white;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+<img src="love.jpg" alt="Emimaal" width="300"> 
+ <h1>Hi Emimaal ❤️</h1>
+    <h2>Do you love me? ❤️❤️❤️</h2>
+
+    <button id="yesBtn">Yes ❤️</button>
+    <button id="noBtn">No 💔</button>
+
+    <p id="message"></p>
+</div>
+
+<script>
+document.getElementById("yesBtn").onclick=function(){
+    document.getElementById("message").innerHTML=
+    "Yay! ❤️ I love you too! 🥰";
+};
+
+document.getElementById("noBtn").onmouseover=function(){
+    this.style.position="absolute";
+    this.style.left=Math.random()*80+"%";
+    this.style.top=Math.random()*80+"%";
+};
+</script>
+
+</body>
+</html>
