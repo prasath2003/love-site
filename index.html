@@ -4,63 +4,198 @@
 <title>For Emimaal ❤️</title>
 
 <style>
-body{
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
     background:linear-gradient(135deg,#ff6ec4,#7873f5);
     font-family:Arial,sans-serif;
+    overflow:hidden;
 }
+
+/* Floating hearts */
+.heart{
+    position:absolute;
+    color:white;
+    font-size:20px;
+    animation:float 8s linear infinite;
+    opacity:0.7;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh);
+    }
+    to{
+        transform:translateY(-120px);
+    }
+}
+
+/* Card */
 .container{
-    background:white;
-    padding:40px;
-    border-radius:20px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    padding:30px;
+    border-radius:25px;
     text-align:center;
+    width:90%;
+    max-width:450px;
+    color:white;
+    box-shadow:0 8px 25px rgba(0,0,0,0.2);
+    animation:fadeIn 1.5s ease;
 }
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+img{
+    width:100%;
+    max-width:300px;
+    border-radius:15px;
+    margin-bottom:15px;
+}
+
+h1{
+    margin-bottom:10px;
+}
+
+h2{
+    margin-bottom:15px;
+}
+
+.message-box{
+    margin-bottom:20px;
+    font-size:15px;
+    line-height:1.6;
+}
+
 button{
     padding:12px 25px;
     margin:10px;
     border:none;
     border-radius:30px;
     cursor:pointer;
+    font-size:16px;
+    transition:0.3s;
 }
+
 #yesBtn{
     background:#ff4081;
     color:white;
 }
+
+#yesBtn:hover{
+    transform:scale(1.1);
+}
+
 #noBtn{
-    background:gray;
+    background:#777;
     color:white;
 }
-</style>
 
+#message{
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
+}
+</style>
 </head>
+
 <body>
 
 <div class="container">
-<img src="https://prasath2003.github.io/love-site/love.jpg" alt="Emimaal" width="300"> 
-    <h1>Hi Emimaal ❤️</h1>
-    <h2>Do you love me? ❤️❤️❤️</h2>
 
-    <button id="yesBtn">Yes ❤️</button>
-    <button id="noBtn">No 💔</button>
+<img src="https://prasath2003.github.io/love-site/love.jpg"
+alt="Emimaal">
 
-    <p id="message"></p>
+<h1>Hi Emimaal ❤️</h1>
+
+<div class="message-box">
+You are one of the most special people in my life. 🌹<br><br>
+I made this little website just for you because you deserve something unique. ✨
+</div>
+
+<h2>Do you love me? ❤️</h2>
+
+<button id="yesBtn">Yes ❤️</button>
+<button id="noBtn">No 💔</button>
+
+<p id="message"></p>
+
 </div>
 
 <script>
+
+// Floating Hearts
+for(let i=0;i<25;i++){
+    let heart=document.createElement("div");
+    heart.innerHTML="❤️";
+    heart.className="heart";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=
+        (Math.random()*5+5)+"s";
+    heart.style.fontSize=
+        (Math.random()*20+15)+"px";
+
+    document.body.appendChild(heart);
+}
+
+// Yes Button
 document.getElementById("yesBtn").onclick=function(){
-    document.getElementById("message").innerHTML=
-    "Yay! ❤️ I love you too! 🥰";
+
+    document.body.innerHTML=`
+    <div style="
+    text-align:center;
+    color:white;
+    padding:20px;">
+    
+    <h1 style="font-size:50px;">
+    ❤️ Thank You ❤️
+    </h1>
+
+    <h2>
+    You just made my day! 🥰
+    </h2>
+
+    <p style="margin-top:20px;font-size:20px;">
+    No matter what happens,
+    you'll always be special to me. 🌹
+    </p>
+
+    </div>`;
 };
 
+// No Button
+let moves=0;
+
 document.getElementById("noBtn").onmouseover=function(){
-    this.style.position="absolute";
-    this.style.left=Math.random()*80+"%";
-    this.style.top=Math.random()*80+"%";
+
+    if(moves<5){
+        this.style.position="absolute";
+        this.style.left=Math.random()*80+"%";
+        this.style.top=Math.random()*80+"%";
+        moves++;
+    }
+    else{
+        this.innerHTML="Think Again ❤️";
+    }
 };
+
 </script>
 
 </body>
