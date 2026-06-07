@@ -20,13 +20,12 @@ body{
     overflow:hidden;
 }
 
-/* Floating hearts */
+/* Floating Hearts */
 .heart{
     position:absolute;
     color:white;
-    font-size:20px;
-    animation:float 8s linear infinite;
     opacity:0.7;
+    animation:float linear infinite;
 }
 
 @keyframes float{
@@ -38,10 +37,9 @@ body{
     }
 }
 
-/* Card */
 .container{
     background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(12px);
     padding:30px;
     border-radius:25px;
     text-align:center;
@@ -49,18 +47,6 @@ body{
     max-width:450px;
     color:white;
     box-shadow:0 8px 25px rgba(0,0,0,0.2);
-    animation:fadeIn 1.5s ease;
-}
-
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
 }
 
 img{
@@ -80,7 +66,6 @@ h2{
 
 .message-box{
     margin-bottom:20px;
-    font-size:15px;
     line-height:1.6;
 }
 
@@ -99,19 +84,31 @@ button{
     color:white;
 }
 
-#yesBtn:hover{
-    transform:scale(1.1);
-}
-
 #noBtn{
-    background:#777;
+    background:#666;
     color:white;
 }
 
 #message{
     margin-top:20px;
-    font-size:20px;
+    font-size:18px;
     font-weight:bold;
+    min-height:30px;
+}
+
+.fade{
+    animation:fade .4s;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 </style>
 </head>
@@ -142,59 +139,103 @@ I made this little website just for you because you deserve something unique. �
 <script>
 
 // Floating Hearts
-for(let i=0;i<25;i++){
+for(let i=0;i<30;i++){
+
     let heart=document.createElement("div");
+
     heart.innerHTML="❤️";
     heart.className="heart";
+
     heart.style.left=Math.random()*100+"vw";
-    heart.style.animationDuration=
-        (Math.random()*5+5)+"s";
-    heart.style.fontSize=
-        (Math.random()*20+15)+"px";
+    heart.style.fontSize=(15+Math.random()*25)+"px";
+    heart.style.animationDuration=(5+Math.random()*6)+"s";
 
     document.body.appendChild(heart);
 }
 
-// Yes Button
+// YES BUTTON
 document.getElementById("yesBtn").onclick=function(){
 
     document.body.innerHTML=`
     <div style="
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     text-align:center;
     color:white;
-    padding:20px;">
-    
-    <h1 style="font-size:50px;">
-    ❤️ Thank You ❤️
-    </h1>
+    padding:20px;
+    background:linear-gradient(135deg,#ff6ec4,#7873f5);">
 
-    <h2>
-    You just made my day! 🥰
-    </h2>
+        <h1 style="font-size:55px;">
+        ❤️ Thank You ❤️
+        </h1>
 
-    <p style="margin-top:20px;font-size:20px;">
-    No matter what happens,
-    you'll always be special to me. 🌹
-    </p>
+        <h2 style="margin-top:15px;">
+        You just made my day! 🥰
+        </h2>
+
+        <p style="
+        margin-top:20px;
+        font-size:22px;
+        max-width:500px;">
+        No matter what happens,
+        you'll always be special to me. 🌹
+        </p>
 
     </div>`;
 };
 
-// No Button
+// NO BUTTON
 let moves=0;
 
-document.getElementById("noBtn").onmouseover=function(){
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+const msg=document.getElementById("message");
 
-    if(moves<5){
-        this.style.position="absolute";
-        this.style.left=Math.random()*80+"%";
-        this.style.top=Math.random()*80+"%";
+const messages=[
+    "Are you sure? 🥺",
+    "Think again ❤️",
+    "Really? 😢",
+    "The hearts are crying 💔",
+    "My code is getting sad 😭",
+    "Last chance 😅"
+];
+
+function moveButton(){
+
+    if(moves < messages.length){
+
+        msg.innerHTML=messages[moves];
+        msg.classList.remove("fade");
+        void msg.offsetWidth;
+        msg.classList.add("fade");
+
+        noBtn.style.position="fixed";
+        noBtn.style.left=Math.random()*75+"vw";
+        noBtn.style.top=Math.random()*75+"vh";
+
+        yesBtn.style.transform=
+            `scale(${1+(moves+1)*0.15})`;
+
         moves++;
     }
     else{
-        this.innerHTML="Think Again ❤️";
+
+        msg.innerHTML=
+        "Okay ❤️ Even if you say no, you'll always be special to me 🌹";
+
+        noBtn.innerHTML="Friends? 😊";
+        noBtn.style.position="static";
     }
-};
+}
+
+// Desktop
+noBtn.addEventListener("mouseover",moveButton);
+
+// Mobile
+noBtn.addEventListener("click",moveButton);
 
 </script>
 
