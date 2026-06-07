@@ -207,27 +207,34 @@ function moveButton(){
 
     if(moves < messages.length){
 
-        msg.innerHTML=messages[moves];
+        msg.innerHTML = messages[moves];
         msg.classList.remove("fade");
         void msg.offsetWidth;
         msg.classList.add("fade");
 
-        noBtn.style.position="fixed";
-        noBtn.style.left=Math.random()*75+"vw";
-        noBtn.style.top=Math.random()*75+"vh";
+        noBtn.style.position = "fixed";
 
-        yesBtn.style.transform=
-            `scale(${1+(moves+1)*0.15})`;
+        const btnWidth = noBtn.offsetWidth;
+        const btnHeight = noBtn.offsetHeight;
+
+        const maxX = window.innerWidth - btnWidth - 20;
+        const maxY = window.innerHeight - btnHeight - 20;
+
+        noBtn.style.left = Math.random() * maxX + "px";
+        noBtn.style.top = Math.random() * maxY + "px";
+
+        yesBtn.style.transform =
+            `scale(${1 + (moves + 1) * 0.15})`;
 
         moves++;
     }
     else{
 
-        msg.innerHTML=
+        msg.innerHTML =
         "Okay ❤️ Even if you say no, you'll always be special to me 🌹";
 
-        noBtn.innerHTML="Friends? 😊";
-        noBtn.style.position="static";
+        noBtn.innerHTML = "🥺";
+        noBtn.style.position = "static";
     }
 }
 
