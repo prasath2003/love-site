@@ -188,61 +188,33 @@ document.getElementById("yesBtn").onclick=function(){
 };
 
 // NO BUTTON
-let moves=0;
+let moves = 0;
 
-const noBtn=document.getElementById("noBtn");
-const yesBtn=document.getElementById("yesBtn");
-const msg=document.getElementById("message");
+const noBtn = document.getElementById("noBtn");
+const msg = document.getElementById("message");
 
-const messages=[
+const messages = [
     "Are you sure? 🥺",
     "Think again ❤️",
     "Really? 😢",
     "The hearts are crying 💔",
     "My code is getting sad 😭",
-    "Last chance 😅"
+    "Last chance 😅",
+    "Okay ❤️ Even if you say no, you'll always be special to me 🌹"
 ];
 
-function moveButton(){
+noBtn.addEventListener("click", function(){
 
-    if(moves < messages.length){
+    msg.innerHTML = messages[moves];
 
-        msg.innerHTML = messages[moves];
-        msg.classList.remove("fade");
-        void msg.offsetWidth;
-        msg.classList.add("fade");
+    msg.classList.remove("fade");
+    void msg.offsetWidth;
+    msg.classList.add("fade");
 
-        noBtn.style.position = "fixed";
-
-        const btnWidth = noBtn.offsetWidth;
-        const btnHeight = noBtn.offsetHeight;
-
-        const maxX = window.innerWidth - btnWidth - 20;
-        const maxY = window.innerHeight - btnHeight - 20;
-
-        noBtn.style.left = Math.random() * maxX + "px";
-        noBtn.style.top = Math.random() * maxY + "px";
-
-        yesBtn.style.transform =
-            `scale(${1 + (moves + 1) * 0.15})`;
-
+    if(moves < messages.length - 1){
         moves++;
     }
-    else{
-
-        msg.innerHTML =
-        "Okay ❤️ Even if you say no, you'll always be special to me 🌹";
-
-        noBtn.innerHTML = "🥺";
-        noBtn.style.position = "static";
-    }
-}
-
-// Desktop
-noBtn.addEventListener("mouseover",moveButton);
-
-// Mobile
-noBtn.addEventListener("click",moveButton);
+});
 
 </script>
 
